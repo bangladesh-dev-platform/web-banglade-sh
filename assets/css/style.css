@@ -107,10 +107,13 @@ button{font-family:inherit}
   .header-inner{gap:10px}
   .brand{font-size:15px;gap:8px;white-space:nowrap}
   .brand img{width:30px;height:30px}
-  .lang-btn{padding:8px 9px}
+  .lang-btn{padding:9px}
   .lang-btn span{display:none}
+  .lang-btn svg{width:18px;height:18px}
   .header-actions{gap:8px;margin-left:4px}
-  .header-actions .btn--wa{padding:11px 14px;font-size:14px}
+  .header-actions .btn--wa{padding:9px;border-radius:999px}
+  .header-actions .btn--wa span{display:none}
+  .header-actions .btn--wa svg{width:20px;height:20px}
 }
 
 /* ---------- hero ---------- */
