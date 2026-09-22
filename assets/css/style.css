@@ -101,6 +101,7 @@ button{font-family:inherit}
   .nav a{padding:13px 14px;font-size:16px}
   .nav .btn{margin-top:6px}
   .desktop-cta{display:none}
+  .header-actions{margin-left:auto}
   .burger{display:block}
 }
 @media (max-width:560px){
@@ -110,7 +111,7 @@ button{font-family:inherit}
   .lang-btn{padding:9px}
   .lang-btn span{display:none}
   .lang-btn svg{width:18px;height:18px}
-  .header-actions{gap:8px;margin-left:4px}
+  .header-actions{gap:8px;margin-left:auto}
   .header-actions .btn--wa{padding:9px;border-radius:999px}
   .header-actions .btn--wa span{display:none}
   .header-actions .btn--wa svg{width:20px;height:20px}
