@@ -155,6 +155,7 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { els.forEach(function (el) { el.classList.add("in"); }); }, 1500);
   }
 
   function initClicks() {

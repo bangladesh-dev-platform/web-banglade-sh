@@ -40,7 +40,6 @@ button{font-family:inherit}
 .wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
 .section{padding:64px 0}
 .section--tint{background:var(--surface)}
-.section--tight{padding:44px 0}
 .skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:200}
 .skip:focus{left:0}
 
@@ -52,8 +51,6 @@ button{font-family:inherit}
   white-space:nowrap;line-height:1;text-align:center;
 }
 .btn svg{width:18px;height:18px;flex:none}
-.btn--primary{background:var(--brand);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.28)}
-.btn--primary:hover{background:var(--brand-dark);transform:translateY(-1px)}
 .btn--ghost{background:#fff;color:var(--ink);border-color:var(--line)}
 .btn--ghost:hover{border-color:var(--brand);color:var(--brand)}
 .btn--light{background:#fff;color:var(--brand-ink);box-shadow:var(--shadow-sm)}
@@ -61,7 +58,6 @@ button{font-family:inherit}
 .btn--wa{background:var(--wa);color:#05341c;box-shadow:0 6px 18px rgba(37,211,102,.32)}
 .btn--wa:hover{background:var(--wa-dark);color:#fff;transform:translateY(-1px)}
 .btn--lg{padding:16px 30px;font-size:16.5px;border-radius:14px}
-.btn--block{width:100%}
 
 /* ---------- header ---------- */
 .site-header{
@@ -100,7 +96,6 @@ button{font-family:inherit}
   .nav.is-open{opacity:1;visibility:visible;transform:none;pointer-events:auto}
   .nav a{padding:13px 14px;font-size:16px}
   .nav .btn{margin-top:6px}
-  .desktop-cta{display:none}
   .header-actions{margin-left:auto}
   .burger{display:block}
 }
@@ -139,7 +134,7 @@ button{font-family:inherit}
 }
 .eyebrow .dot{ width:8px;height:8px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 4px rgba(37,211,102,.18)}
 .hero h1{font-size:clamp(31px,4.4vw,50px);font-weight:700;letter-spacing:-.02em}
-.hero h1 .hl{color:var(--brand);position:relative;white-space:nowrap}
+.hero h1 .hl{color:var(--brand);position:relative;z-index:0;white-space:nowrap}
 .hero h1 .hl::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.32em;background:linear-gradient(90deg,rgba(37,99,235,.18),rgba(6,182,212,.18));border-radius:6px;z-index:-1}
 .hero-sub{margin-top:18px;font-size:clamp(16px,1.5vw,18.5px);color:var(--muted);max-width:520px}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
@@ -299,3 +294,4 @@ button{font-family:inherit}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.mock-chat{animation:none}}
+@media (scripting:none){.reveal{opacity:1;transform:none}}

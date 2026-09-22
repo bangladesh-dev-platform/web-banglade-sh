@@ -24,6 +24,7 @@ assets/js/i18n.js         # English strings (Bengali defaults live in the HTML)
 assets/js/main.js         # config, i18n, WhatsApp/call CTAs, tracking
 assets/img/logo.svg       # brand mark
 assets/img/favicon.svg
+assets/img/og.png         # 1200x630 social/WhatsApp share image
 ```
 
 ## Configuration
