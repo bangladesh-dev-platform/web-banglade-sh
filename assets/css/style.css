@@ -181,7 +181,7 @@ button{font-family:inherit}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 @media (max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:38px;padding:36px 0 46px}
+  .hero-inner{grid-template-columns:1fr;gap:38px;padding:52px 0 58px}
   .hero-visual{order:2;min-height:0}
   .browser{transform:none}
   .hero h1 .hl{white-space:normal}
