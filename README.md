@@ -27,9 +27,6 @@ assets/img/favicon.svg
 assets/img/og.png         # 1200x630 social/WhatsApp share image
 ```
 
-Facebook ad creatives + suggested copy live in [`ads/`](ads/).
-
-
 ## Configuration
 
 Edit the `CONFIG` object at the top of `assets/js/main.js`:
