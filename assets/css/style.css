@@ -127,7 +127,7 @@ button{font-family:inherit}
           mask-image:linear-gradient(#000,transparent 78%);
   pointer-events:none;
 }
-.hero-inner{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;padding:58px 0 62px}
+.hero-inner{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;padding-top:58px;padding-bottom:62px}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
   color:var(--brand-ink);font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px;
@@ -181,7 +181,7 @@ button{font-family:inherit}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 @media (max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:38px;padding:52px 0 58px}
+  .hero-inner{grid-template-columns:1fr;gap:38px;padding-top:52px;padding-bottom:58px}
   .hero-visual{order:2;min-height:0}
   .browser{transform:none}
   .hero h1 .hl{white-space:normal}
