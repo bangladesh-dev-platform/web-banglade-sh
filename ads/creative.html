@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%}
+  body{font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;-webkit-font-smoothing:antialiased}
+
+  .ad{
+    position:relative;width:100vw;height:100vh;overflow:hidden;color:#fff;
+    background:radial-gradient(120% 90% at 80% -10%, #1b3d7a 0%, transparent 58%),
+               linear-gradient(155deg,#08111f 0%,#102a52 52%,#1e49c9 100%);
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:5vmin 6.5vmin;
+  }
+  .grid{position:absolute;inset:0;opacity:.05;
+    background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+    background-size:6vmin 6vmin}
+  .glow{position:absolute;border-radius:50%}
+  .glow.a{width:86vmin;height:86vmin;right:-30vmin;top:-34vmin;background:radial-gradient(circle,var(--accent-s),transparent 68%)}
+  .glow.b{width:70vmin;height:70vmin;left:-30vmin;bottom:-34vmin;background:radial-gradient(circle,rgba(37,99,235,.5),transparent 70%)}
+
+  .top,.mid,.foot{position:relative}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:3vmin}
+  .brand{display:flex;align-items:center;gap:2vmin}
+  .mark{width:7vmin;height:7vmin;border-radius:2vmin;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;box-shadow:0 1.2vmin 2.6vmin rgba(0,0,0,.4)}
+  .mark svg{width:4.2vmin;height:4.2vmin}
+  .brand-txt{font-size:3vmin;font-weight:700;line-height:1.1}
+  .brand-txt b{color:var(--accent)}
+  .brand-txt small{display:block;font-size:1.8vmin;font-weight:500;letter-spacing:.2em;color:#9fbde8;margin-top:.4vmin}
+  .badge{display:flex;align-items:center;gap:1.1vmin;background:rgba(255,255,255,.1);border:.28vmin solid rgba(255,255,255,.22);border-radius:99px;padding:1vmin 2.2vmin;font-size:2.1vmin;font-weight:600;color:#eaf2ff;white-space:nowrap}
+  .badge i{width:1.5vmin;height:1.5vmin;border-radius:50%;background:#25d366;box-shadow:0 0 0 .7vmin rgba(37,211,102,.2)}
+
+  .mid{display:flex;flex-direction:column;flex:1;justify-content:center;padding:1.5vmin 0}
+  .tag{display:inline-flex;align-self:flex-start;background:color-mix(in srgb, var(--accent) 18%, transparent);border:.3vmin solid color-mix(in srgb, var(--accent) 55%, transparent);color:var(--accent);font-weight:700;font-size:2.1vmin;padding:.8vmin 2.2vmin;border-radius:99px;margin-bottom:2vmin}
+  h1{font-size:7vmin;line-height:1.14;font-weight:700;letter-spacing:-.015em;max-width:96%}
+  h1 .hl{color:var(--accent)}
+  .sub{margin-top:2vmin;font-size:2.6vmin;line-height:1.45;color:#cfdff8;max-width:90%}
+  .visual{margin-top:2.5vmin;display:flex;justify-content:center;align-items:flex-end;height:30vmin}
+
+  .foot{display:flex;flex-direction:column;gap:1.8vmin;align-items:center}
+  .cta{display:flex;align-items:center;justify-content:center;gap:1.5vmin;background:#25d366;color:#05341c;font-weight:700;font-size:3.3vmin;padding:2.4vmin 5.5vmin;border-radius:99px;box-shadow:0 2vmin 4.5vmin rgba(37,211,102,.35)}
+  .cta svg{width:3.8vmin;height:3.8vmin}
+  .urlrow{display:flex;align-items:center;gap:2.4vmin;font-size:2.4vmin;color:#c3d6f2}
+  .urlrow b{color:#fff;font-weight:700}
+  .urlrow span{display:flex;align-items:center;gap:.9vmin}
+  .urlrow svg{width:2.3vmin;height:2.3vmin}
+
+  /* ---- device visuals ---- */
+  .laptop{width:45vmin;max-width:84%}
+  .laptop .screen{aspect-ratio:16/10;background:#fff;border-radius:1.8vmin;border:.5vmin solid #26364f;padding:1.8vmin;box-shadow:0 2.6vmin 5vmin rgba(0,0,0,.5)}
+  .laptop .s-bar{display:flex;gap:1vmin;margin-bottom:1.8vmin}
+  .laptop .s-bar i{width:1.4vmin;height:1.4vmin;border-radius:50%;background:#dbe3f0}
+  .laptop .s-hero{height:10vmin;border-radius:1.4vmin;background:linear-gradient(120deg,#e8f0ff,#dff6ff)}
+  .laptop .s-cards{display:flex;gap:1.4vmin;margin-top:1.8vmin}
+  .laptop .s-cards span{flex:1;height:6vmin;border-radius:1.2vmin;background:#eef3fb;border:.3vmin solid #e3eaf6}
+  .laptop .base{width:52vmin;max-width:96%;height:2vmin;background:linear-gradient(#54657f,#2b3a52);border-radius:0 0 1.8vmin 1.8vmin;margin:0 auto}
+
+  .phone{height:30vmin;width:auto;aspect-ratio:9/19;background:#0b1626;border-radius:4vmin;padding:1vmin;box-shadow:0 2.6vmin 5vmin rgba(0,0,0,.55);position:relative}
+  .phone .notch{position:absolute;top:1.8vmin;left:50%;transform:translateX(-50%);width:8vmin;height:1.4vmin;border-radius:99px;background:#0b1626;z-index:3}
+  .phone .pscr{background:#f7fafd;border-radius:3.1vmin;height:100%;overflow:hidden;padding:3.4vmin 1.6vmin 1.6vmin}
+  .p-head{height:3.8vmin;border-radius:1.1vmin;background:var(--accent);opacity:.85;margin-bottom:1.8vmin}
+  .p-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2vmin}
+  .p-grid span{aspect-ratio:1/1;border-radius:1.4vmin;background:#e9eef8}
+  .p-grid span:nth-child(1){background:linear-gradient(135deg,var(--accent),#2563eb)}
+  .p-grid span:nth-child(5){background:linear-gradient(135deg,#fbbf24,var(--accent))}
+  .p-cta{height:4.4vmin;border-radius:1.4vmin;background:#25d366;margin-top:1.8vmin}
+  .p-bars{display:flex;align-items:flex-end;gap:1.1vmin;height:10vmin;margin-bottom:2vmin}
+  .p-bars span{flex:1;border-radius:.9vmin .9vmin 0 0;background:linear-gradient(var(--accent),#2563eb)}
+  .p-bars span:nth-child(1){height:40%}.p-bars span:nth-child(2){height:70%}
+  .p-bars span:nth-child(3){height:52%}.p-bars span:nth-child(4){height:88%}
+  .p-rows{display:flex;flex-direction:column;gap:1.2vmin}
+  .p-rows i{height:3.6vmin;border-radius:1.2vmin;background:#e9eef8}
+
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:2vmin;width:44vmin;max-width:90%}
+  .tile{aspect-ratio:1;border-radius:2.4vmin;background:rgba(255,255,255,.09);border:.3vmin solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;box-shadow:0 1.4vmin 2.6vmin rgba(0,0,0,.25)}
+  .tile svg{width:6vmin;height:6vmin;color:var(--accent)}
+  .tile.hot{background:linear-gradient(135deg,var(--accent),#2563eb);border-color:transparent}
+  .tile.hot svg{color:#fff}
+
+  /* portrait (4:5) fills more of the frame */
+  .ad.tall .mid{padding:3vmin 0}
+  .ad.tall .mark{width:8vmin;height:8vmin}
+  .ad.tall .mark svg{width:4.8vmin;height:4.8vmin}
+  .ad.tall .brand-txt{font-size:3.5vmin}
+  .ad.tall .brand-txt small{font-size:2vmin}
+  .ad.tall .badge{font-size:2.4vmin}
+  .ad.tall .tag{font-size:2.4vmin;margin-bottom:2.6vmin;padding:.9vmin 2.6vmin}
+  .ad.tall h1{font-size:8.2vmin}
+  .ad.tall .sub{font-size:3vmin;margin-top:2.4vmin}
+  .ad.tall .visual{height:38vmin;margin-top:3vmin}
+  .ad.tall .laptop{width:56vmin}
+  .ad.tall .laptop .base{width:64vmin}
+  .ad.tall .phone{height:38vmin}
+  .ad.tall .tiles{width:56vmin;gap:2.6vmin}
+  .ad.tall .cta{font-size:3.8vmin;padding:3vmin 6.5vmin}
+  .ad.tall .urlrow{font-size:2.8vmin}
+</style>
+</head>
+<body>
+  <div class="ad" id="ad">
+    <div class="grid"></div>
+    <div class="glow a"></div>
+    <div class="glow b"></div>
+
+    <header class="top">
+      <div class="brand">
+        <div class="mark"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17.5 L16.5 31.5 L21 20.5 L25.5 31.5 L31 17.5"/></svg></div>
+        <div class="brand-txt">Web <b>Bangladesh</b><small>WEB &amp; APP AGENCY</small></div>
+      </div>
+      <div class="badge"><i></i> ফ্রি পরামর্শ</div>
+    </header>
+
+    <main class="mid">
+      <span class="tag" id="tag"></span>
+      <h1><span id="h1a"></span><br><span class="hl" id="h1b"></span></h1>
+      <p class="sub" id="sub"></p>
+      <div class="visual" id="visual"></div>
+    </main>
+
+    <footer class="foot">
+      <div class="cta">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+        <span id="cta"></span>
+      </div>
+      <div class="urlrow">
+        <b>web.banglade.sh</b>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +880 1324-229999</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    var laptop = '<div class="laptop"><div class="screen"><div class="s-bar"><i></i><i></i><i></i></div><div class="s-hero"></div><div class="s-cards"><span></span><span></span><span></span></div></div><div class="base"></div></div>';
+    var phoneShop = '<div class="phone"><div class="notch"></div><div class="pscr"><div class="p-head"></div><div class="p-grid"><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="p-cta"></div></div></div>';
+    var phoneApp = '<div class="phone"><div class="notch"></div><div class="pscr"><div class="p-bars"><span></span><span></span><span></span><span></span></div><div class="p-rows"><i></i><i></i><i></i></div></div></div>';
+    var tiles = '<div class="tiles">'
+      + '<div class="tile hot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>'
+      + '<div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/></svg></div>'
+      + '<div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>'
+      + '<div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg></div>'
+      + '<div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>'
+      + '<div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>'
+      + '</div>';
+
+    var VARIANTS = {
+      "1": { accent:"#38bdf8", tag:"ওয়েবসাইট ডেভেলপমেন্ট", h1a:"ব্যবসার জন্য", h1b:"ওয়েবসাইট বানান", sub:"কর্পোরেট সাইট, ল্যান্ডিং পেজ ও ব্লগ — মোবাইলে দ্রুত ও সুন্দর।", cta:"ফ্রি কোটেশন নিন", vis:laptop },
+      "2": { accent:"#34d399", tag:"ই-কমার্স", h1a:"অনলাইন স্টোর", h1b:"খুলুন আজই", sub:"প্রোডাক্ট, কার্ট, পেমেন্ট ও ডেলিভারি — বিক্রির জন্য প্রস্তুত।", cta:"স্টোর বানান", vis:phoneShop },
+      "3": { accent:"#a78bfa", tag:"কাস্টম অ্যাপ", h1a:"নিজের ব্যবসার", h1b:"অ্যাপ বানান", sub:"Android ও iOS অ্যাপ — আপনার কাজের ধরন অনুযায়ী।", cta:"কথা বলুন", vis:phoneApp },
+      "4": { accent:"#fbbf24", tag:"ডিজিটাল সমাধান", h1a:"ওয়েবসাইট থেকে অ্যাপ", h1b:"সব এক জায়গায়", sub:"ডিজাইন, হোস্টিং, সাপোর্ট — পুরোটা আমাদের দায়িত্বে।", cta:"আজই শুরু করুন", vis:tiles }
+    };
+    var v = new URLSearchParams(location.search).get("v") || "1";
+    var d = VARIANTS[v] || VARIANTS["1"];
+    var ad = document.getElementById("ad");
+    ad.style.setProperty("--accent", d.accent);
+    ad.style.setProperty("--accent-s", d.accent + "6b");
+    if (window.innerHeight / window.innerWidth >= 1.15) ad.classList.add("tall");
+    document.getElementById("tag").textContent = d.tag;
+    document.getElementById("h1a").textContent = d.h1a;
+    document.getElementById("h1b").textContent = d.h1b;
+    document.getElementById("sub").textContent = d.sub;
+    document.getElementById("cta").textContent = d.cta;
+    document.getElementById("visual").innerHTML = d.vis;
+  </script>
+</body>
+</html>
