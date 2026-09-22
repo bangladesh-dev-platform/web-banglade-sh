@@ -70,9 +70,6 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       defaults[el.getAttribute("data-i18n")] = el.textContent;
     });
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
-      defaults["ph:" + el.getAttribute("data-i18n-placeholder")] = el.getAttribute("placeholder") || "";
-    });
     defaults["__title"] = document.title;
     var md = document.querySelector('meta[name="description"]');
     defaults["__desc"] = md ? md.getAttribute("content") : "";
@@ -93,11 +90,6 @@
       var key = el.getAttribute("data-i18n");
       el.textContent = useEn && dict[key] != null ? dict[key] : (defaults[key] || "");
     });
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
-      var key = el.getAttribute("data-i18n-placeholder");
-      var fallback = defaults["ph:" + key] || "";
-      el.setAttribute("placeholder", useEn && dict[key] != null ? dict[key] : fallback);
-    });
 
     document.title = useEn && dict["meta.title"] ? dict["meta.title"] : defaults["__title"];
     var md = document.querySelector('meta[name="description"]');
@@ -111,74 +103,19 @@
   }
 
   /* ---------- whatsapp links ---------- */
+  function waText() {
+    var text = INTRO[lang];
+    var src = utmSummary(readUtm());
+    if (src) text += (lang === "en" ? "\n\nSource: " : "\n\nসোর্স: ") + src;
+    return text;
+  }
   function refreshWaLinks() {
     document.querySelectorAll("[data-wa]").forEach(function (el) {
       var kind = el.getAttribute("data-wa");
-      var text = kind === "fab" || kind === "contact" ? "" : INTRO[lang];
-      if (kind === "contact") text = "";
+      var text = kind === "fab" ? "" : waText();
       el.setAttribute("href", waLink(text));
       el.setAttribute("target", "_blank");
       el.setAttribute("rel", "noopener");
-    });
-  }
-
-  /* ---------- quote form ---------- */
-  function buildOrderMessage() {
-    var services = [];
-    document.querySelectorAll('input[name="service"]:checked').forEach(function (input) {
-      var txt = input.closest(".chip").querySelector(".txt");
-      if (txt) services.push(txt.textContent.trim());
-    });
-    var budgetSel = document.getElementById("f-budget");
-    var budget = budgetSel && budgetSel.selectedIndex > 0 ? budgetSel.options[budgetSel.selectedIndex].textContent.trim() : "";
-    var details = (document.getElementById("f-message") || {}).value || "";
-    details = details.trim();
-
-    var utm = readUtm();
-    var src = utmSummary(utm);
-    var L = lang === "en"
-      ? { head: "New enquiry — Web Bangladesh", svc: "Services", budget: "Budget", details: "Details", src: "Source" }
-      : { head: "নতুন ইনকোয়ারি — Web Bangladesh", svc: "সেবা", budget: "বাজেট", details: "বিস্তারিত", src: "সোর্স" };
-
-    var lines = ["*" + L.head + "*", ""];
-    lines.push(L.svc + ": " + services.join(", "));
-    if (budget) lines.push(L.budget + ": " + budget);
-    if (details) lines.push(L.details + ": " + details);
-    if (src) { lines.push(""); lines.push(L.src + ": " + src); }
-    return lines.join("\n");
-  }
-
-  function initForm() {
-    var form = document.getElementById("quote-form");
-    if (!form) return;
-    var status = document.getElementById("form-status");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var services = form.querySelectorAll('input[name="service"]:checked');
-      if (!services.length) {
-        if (status) {
-          status.className = "form-status err show";
-          status.textContent = (window.WB_I18N.en && lang === "en")
-            ? window.WB_I18N.en["form.err.services"]
-            : "অনুগ্রহ করে অন্তত একটি সেবা নির্বাচন করুন।";
-        }
-        return;
-      }
-      if (status) { status.className = "form-status"; status.textContent = ""; }
-
-      var message = buildOrderMessage();
-      var value = 0;
-      track("generate_lead", { method: "whatsapp_form", services: services.length });
-      fbTrack("Lead", { content_name: "Quote form", value: value, currency: "BDT" });
-
-      window.open(waLink(message), "_blank", "noopener");
-      if (status) {
-        status.className = "form-status ok show";
-        status.textContent = lang === "en"
-          ? "Opening WhatsApp… send the message there to confirm."
-          : "WhatsApp খোলা হচ্ছে… সেখানে পাঠিয়ে নিশ্চিত করুন।";
-      }
     });
   }
 
@@ -220,12 +157,22 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
-  function initTrackingClicks() {
+  function initClicks() {
     document.querySelectorAll("[data-wa]").forEach(function (el) {
       el.addEventListener("click", function () {
         var kind = el.getAttribute("data-wa") || "link";
         track("contact_whatsapp", { location: kind });
         fbTrack("Contact", { content_name: kind });
+        if (kind === "hero" || kind === "contact") {
+          track("generate_lead", { method: "whatsapp", location: kind });
+          fbTrack("Lead", { content_name: "WhatsApp CTA" });
+        }
+      });
+    });
+    document.querySelectorAll("[data-call]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        track("click_call", {});
+        fbTrack("Contact", { content_name: "Call" });
       });
     });
   }
@@ -235,9 +182,8 @@
     initPixel();
     applyLang(currentLang());
     initNav();
-    initForm();
     initReveal();
-    initTrackingClicks();
+    initClicks();
 
     var yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
